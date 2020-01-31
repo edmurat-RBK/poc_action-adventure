@@ -10,15 +10,14 @@ public class PlayerMovement : MonoBehaviour
 
     private float inputHorizontal;
     private float inputVertical;
+    private Vector3 force;
 
     private Rigidbody2D rb;
-    private Animator anim;
     private PlayerState playerState;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
     }
 
@@ -29,18 +28,23 @@ public class PlayerMovement : MonoBehaviour
             inputHorizontal = Input.GetAxis("Horizontal");
             inputVertical = Input.GetAxis("Vertical");
 
-            Vector3 force = new Vector3(inputHorizontal, -inputVertical, 0f).normalized;
+            force.Set(inputHorizontal, -inputVertical, 0f);
+            force = force.normalized;
             playerState.CurrentDirection = force;
             rb.velocity = (force * (baseSpeed * speedModifier));
 
-            if(!force.Equals(Vector3.zero))
-            {
-                playerState.IsWalking = true;
-            }
-            else
+            if(force.Equals(Vector3.zero))
             {
                 playerState.IsWalking = false;
             }
+            else
+            {
+                playerState.IsWalking = true;
+            }
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
         }
     }
 }

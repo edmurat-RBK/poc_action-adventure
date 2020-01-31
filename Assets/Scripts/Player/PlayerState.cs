@@ -50,6 +50,44 @@ public class PlayerState : MonoBehaviour
         }
     }
 
+    private bool canAttack = true;
+    public bool CanAttack
+    {
+        get
+        {
+            return canAttack;
+        }
+
+        set
+        {
+            canAttack = value;
+        }
+    }
+
+    private bool isAttacking = false;
+    public bool IsAttacking
+    {
+        get
+        {
+            return isAttacking;
+        }
+
+        set
+        {
+            isAttacking = value;
+            if(value)
+            {
+                canWalk = false;
+                canAttack = false;
+            }
+            else
+            {
+                canWalk = true;
+                canAttack = true;
+            }
+        }
+    }
+
     private Animator anim;
 
     private void Start()
@@ -75,8 +113,23 @@ public class PlayerState : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        anim.SetBool("isWalking", isWalking);
         anim.SetFloat("horizontalDirection", lastDirection.x);
         anim.SetFloat("verticalDirection", lastDirection.y);
+
+        anim.SetBool("isWalking", isWalking);
+        anim.SetBool("isAttacking", isAttacking);
+    }
+
+    public void GetAnimationEvent(string message)
+    {
+        switch(message)
+        {
+            case "SwordAttackEnded":
+                IsAttacking = false;
+                break;
+
+            default:
+                break;
+        }
     }
 }
