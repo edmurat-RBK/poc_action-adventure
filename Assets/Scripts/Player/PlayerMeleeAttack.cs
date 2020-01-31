@@ -33,12 +33,15 @@ public class PlayerMeleeAttack : MonoBehaviour
     //Unity Update event
     private void Update()
     {
+        //If player can do a melee attack
         if (playerState.CanMeleeAttack)
         {
+            //Get melee attack input
             inputAttack = Input.GetButtonDown("MeleeAttack");
 
             if(inputAttack)
             {
+                //Change "isMeleeAttacking" player state
                 playerState.IsMeleeAttacking = true;
             }
         }

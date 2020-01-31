@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 2103702391}
   - component: {fileID: 2103702393}
   - component: {fileID: 2103702394}
+  - component: {fileID: 2103702396}
   - component: {fileID: 2103702390}
   - component: {fileID: 2103702395}
   m_Layer: 0
@@ -345,7 +346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 5
-  speedModifier: 1
 --- !u!212 &2103702391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -461,5 +461,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da74713aaeb8f54e85b5ba8e3f75faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseAttackDamage: 1
-  attackModifier: 1
+  baseMeleeAttackDamage: 1
+--- !u!114 &2103702396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103702388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100deac31f1974c40803004c45d4b2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
