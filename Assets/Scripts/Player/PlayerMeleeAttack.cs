@@ -10,6 +10,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     private bool inputAttack;
 
     private PlayerState playerState;
+    private PlayerModifier playerModifier;
 
     private void Start()
     {
