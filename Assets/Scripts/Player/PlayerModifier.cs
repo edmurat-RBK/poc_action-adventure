@@ -18,6 +18,20 @@ public class PlayerModifier : MonoBehaviour
         }
     }
 
+    private float healthModifier = 1f;
+    public float HealthModifier
+    {
+        get
+        {
+            return healthModifier;
+        }
+
+        set
+        {
+            healthModifier = value;
+        }
+    }
+
     private float attackDamageModifier = 1f;
     public float AttackDamageModifier
     {
