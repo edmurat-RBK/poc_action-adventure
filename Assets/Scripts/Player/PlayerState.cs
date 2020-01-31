@@ -50,40 +50,40 @@ public class PlayerState : MonoBehaviour
         }
     }
 
-    private bool canAttack = true;
-    public bool CanAttack
+    private bool canMeleeAttack = true;
+    public bool CanMeleeAttack
     {
         get
         {
-            return canAttack;
+            return canMeleeAttack;
         }
 
         set
         {
-            canAttack = value;
+            canMeleeAttack = value;
         }
     }
 
-    private bool isAttacking = false;
-    public bool IsAttacking
+    private bool isMeleeAttacking = false;
+    public bool IsMeleeAttacking
     {
         get
         {
-            return isAttacking;
+            return isMeleeAttacking;
         }
 
         set
         {
-            isAttacking = value;
+            isMeleeAttacking = value;
             if(value)
             {
                 canWalk = false;
-                canAttack = false;
+                canMeleeAttack = false;
             }
             else
             {
                 canWalk = true;
-                canAttack = true;
+                canMeleeAttack = true;
             }
         }
     }
@@ -117,15 +117,15 @@ public class PlayerState : MonoBehaviour
         anim.SetFloat("verticalDirection", lastDirection.y);
 
         anim.SetBool("isWalking", isWalking);
-        anim.SetBool("isAttacking", isAttacking);
+        anim.SetBool("isMeleeAttacking", isMeleeAttacking);
     }
 
     public void GetAnimationEvent(string message)
     {
         switch(message)
         {
-            case "SwordAttackEnded":
-                IsAttacking = false;
+            case "MeleeAttackEnded":
+                IsMeleeAttacking = false;
                 break;
 
             default:

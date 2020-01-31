@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSwordAttack : MonoBehaviour
+public class PlayerMeleeAttack : MonoBehaviour
 {
-    public float baseAttackDamage = 1f;
+    public float baseMeleeAttackDamage = 1f;
     public float attackModifier = 1f;
 
     private bool inputAttack;
@@ -18,13 +18,13 @@ public class PlayerSwordAttack : MonoBehaviour
 
     private void Update()
     {
-        if (playerState.CanAttack)
+        if (playerState.CanMeleeAttack)
         {
-            inputAttack = Input.GetButtonDown("SwordAttack");
+            inputAttack = Input.GetButtonDown("MeleeAttack");
 
             if(inputAttack)
             {
-                playerState.IsAttacking = true;
+                playerState.IsMeleeAttacking = true;
             }
         }
     }

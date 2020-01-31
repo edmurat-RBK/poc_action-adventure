@@ -38,7 +38,39 @@ InputManager:
     axis: 1
     joyNum: 1
   - serializedVersion: 3
-    m_Name: SwordAttack
+    m_Name: Horizontal
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: q
+    positiveButton: d
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.5
+    sensitivity: 1
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Vertical
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: z
+    positiveButton: s
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10
+    dead: 0.5
+    sensitivity: 1
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: MeleeAttack
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
