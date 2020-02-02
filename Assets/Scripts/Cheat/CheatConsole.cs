@@ -220,7 +220,22 @@ public class CheatConsole : MonoBehaviour
             string printHelp;
             printHelp = 
                 "---- COMMANDS ----\n" +
-                "help :\n"+
+                "health add <value>:\n" +
+                "Add health point" +
+                "\n" +
+                "health remove <value>:\n" +
+                "Remove health point" +
+                "\n" +
+                "health set <value>:\n" +
+                "Set health point" +
+                "\n" +
+                "modifier <modifier> set <value> :\n" +
+                "Modify a modifier value"+
+                "\n"+
+                "modifier <modifier> reset :\n" +
+                "Restore a modifier to default value" +
+                "\n" +
+                "help :\n" +
                 "Display a list of available commands\n"+
                 "\n"+
                 "help <command> :\n"+
@@ -236,7 +251,10 @@ public class CheatConsole : MonoBehaviour
                 "Give a random number between <min> and <max>\n" +
                 "\n" +
                 "say <message> :\n" +
-                "Print the message in the console\n";
+                "Print the message in the console\n"+
+                "\n"+
+                "tp <x> <y> :\n"+
+                "Teleport player at specified coordinates\n";
             AddMessage(new ConsoleMessage(MessageType.INFO, printHelp));
         }
         else if(args.Length == 2)
@@ -277,6 +295,42 @@ public class CheatConsole : MonoBehaviour
                         "          random <max>\n"+
                         "          random <min> <max>\n";
                     AddMessage(new ConsoleMessage(MessageType.INFO, printRandom));
+                    break;
+
+                case "health":
+                    string printHealth;
+                    printHealth =
+                        "--- HELP ---\n" +
+                        "health :\n" +
+                        "Change health point value\n" +
+                        "\n" +
+                        "Synthax : health add <value>\n" +
+                        "          health remove <value>\n" +
+                        "          health set <value>\n";
+                    AddMessage(new ConsoleMessage(MessageType.INFO, printHealth));
+                    break;
+
+                case "modifier":
+                    string printModifier;
+                    printModifier =
+                        "--- HELP ---\n" +
+                        "modifier :\n" +
+                        "Change modifier value\n" +
+                        "\n" +
+                        "Synthax : modifier <modifier> set <value>\n" +
+                        "          modifier <modifier> reset\n";
+                    AddMessage(new ConsoleMessage(MessageType.INFO, printModifier));
+                    break;
+
+                case "tp":
+                    string printTp;
+                    printTp =
+                        "--- HELP ---\n" +
+                        "tp :\n" +
+                        "Teleport player at coordinates\n" +
+                        "\n" +
+                        "Synthax : tp <x> <y>\n";
+                    AddMessage(new ConsoleMessage(MessageType.INFO, printTp));
                     break;
 
                 default:
