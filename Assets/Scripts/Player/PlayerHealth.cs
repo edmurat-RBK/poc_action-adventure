@@ -39,17 +39,4 @@ public class PlayerHealth : MonoBehaviour
             maximumHealth = value;
         }
     }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            CurrentHealth++;
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            CurrentHealth--;
-        }
-    }
 }
