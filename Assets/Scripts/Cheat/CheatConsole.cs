@@ -59,12 +59,20 @@ public class CheatConsole : MonoBehaviour
     private List<GameObject> messageList = new List<GameObject>();
     private List<string> commandHistory = new List<string>() { "" };
     private int indexHistory = 0;
+
+    private GameObject player;
+    private PlayerModifier playerModifier;
+    private PlayerHealth playerHealth;
     
 
     private void Start()
     {
         console = transform.GetChild(0).gameObject;
         console.SetActive(false);
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerModifier = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerModifier>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     private void Update()
@@ -162,6 +170,7 @@ public class CheatConsole : MonoBehaviour
         if(indexHistory < commandHistory.Count)
         {
             inputField.text = commandHistory[indexHistory];
+            inputField.MoveTextEnd(false);
         }
         else
         {
@@ -184,6 +193,18 @@ public class CheatConsole : MonoBehaviour
 
             case "random":
                 commandRandom(word);
+                break;
+
+            case "health":
+                commandHealth(word);
+                break;
+
+            case "modifier":
+                commandModifier(word);
+                break;
+
+            case "tp":
+                commandTp(word);
                 break;
 
             default:
@@ -324,6 +345,128 @@ public class CheatConsole : MonoBehaviour
         else
         {
             AddMessage(new ConsoleMessage(MessageType.ERROR, "random : Bad usage"));
+        }
+    }
+
+    public void commandModifier(string[] args)
+    {
+        if(args.Length >= 3)
+        {
+            switch(args[1])
+            {
+                case "speed":
+                    switch(args[2])
+                    {
+                        case "set":
+                            try
+                            {
+                                float value = float.Parse(args[3]);
+                                playerModifier.SpeedModifier = value;
+                                AddMessage(new ConsoleMessage(MessageType.INFO, "Player speed modifier set to " + value));
+                            }
+                            catch
+                            {
+                                AddMessage(new ConsoleMessage(MessageType.ERROR, "modifier : Bad usage"));
+                            }
+                            break;
+
+                        case "reset":
+                            playerModifier.SpeedModifier = 1.0f;
+                            AddMessage(new ConsoleMessage(MessageType.INFO, "Player speed modifier reset"));
+                            break;
+
+                        default:
+                            AddMessage(new ConsoleMessage(MessageType.ERROR, "modifier : Bad usage"));
+                            break;
+                    }
+                    break;
+
+                default:
+                    AddMessage(new ConsoleMessage(MessageType.ERROR, "modifier : Bad usage"));
+                    break;
+            }
+        }
+        else
+        {
+            AddMessage(new ConsoleMessage(MessageType.ERROR, "modifier : Bad usage"));
+        }
+    }
+
+    public void commandHealth(string[] args)
+    {
+        if (args.Length == 3)
+        {
+            switch (args[1])
+            {
+                case "set":
+                    try
+                    {
+                        int value = int.Parse(args[2]);
+                        playerHealth.CurrentHealth = value;
+                        AddMessage(new ConsoleMessage(MessageType.INFO, "Player health set to " + value));
+                    }
+                    catch
+                    {
+                        AddMessage(new ConsoleMessage(MessageType.ERROR, "health : Bad usage"));
+                    }
+                    break;
+
+                case "add":
+                    try
+                    {
+                        int value = int.Parse(args[2]);
+                        playerHealth.CurrentHealth += value;
+                        AddMessage(new ConsoleMessage(MessageType.INFO, "Player health set to " + playerHealth.CurrentHealth));
+                    }
+                    catch
+                    {
+                        AddMessage(new ConsoleMessage(MessageType.ERROR, "health : Bad usage"));
+                    }
+                    break;
+
+                case "remove":
+                    try
+                    {
+                        int value = int.Parse(args[2]);
+                        playerHealth.CurrentHealth -= value;
+                        AddMessage(new ConsoleMessage(MessageType.INFO, "Player health set to " + playerHealth.CurrentHealth));
+                    }
+                    catch
+                    {
+                        AddMessage(new ConsoleMessage(MessageType.ERROR, "health : Bad usage"));
+                    }
+                    break;
+
+                default:
+                    AddMessage(new ConsoleMessage(MessageType.ERROR, "health : Bad usage"));
+                    break;
+            }
+        }
+        else
+        {
+            AddMessage(new ConsoleMessage(MessageType.ERROR, "health : Bad usage"));
+        }
+    }
+
+    public void commandTp(string[] args)
+    {
+        if(args.Length == 3)
+        {
+            try
+            {
+                int xPos = int.Parse(args[1]);
+                int yPos = int.Parse(args[2]);
+                player.transform.position = new Vector3(xPos, yPos, 0f);
+                AddMessage(new ConsoleMessage(MessageType.INFO, "Player teleported at ("+xPos+", "+yPos+")"));
+            }
+            catch
+            {
+                AddMessage(new ConsoleMessage(MessageType.ERROR, "tp : Bad usage"));
+            }
+        }
+        else
+        {
+            AddMessage(new ConsoleMessage(MessageType.ERROR, "tp : Bad usage"));
         }
     }
 }
